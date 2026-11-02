@@ -1,30 +1,39 @@
-// DinkCDO Core Booking Logic
-// Settings: Operating hours = 12AM‑11PM; show only available slots; 3% commission (added on top)
-const SETTINGS = {
-  startHour: 0, // 12 AM (00:00)
-  endHour: 23,  // 11 PM (23:00)
-  commissionRate: 0.03 // 3% platform service fee
-};
-const venues = [
-  {
-    id: "venue‑1",
-    name: "Pickle World Limketkai",
-    totalCourts: 3,
-    baseFeePerHour: 500,
-    bookings: {}
-  }
-];
-function generateTimeSlots() {
-  let slots = [];
-  for(let h = SETTINGS.startHour; h <= SETTINGS.endHour; h++) {
-    slots.push(h);
-  }
-  return slots;
-}
-function getAvailableSlots(venue) {
-  const allSlots = generateTimeSlots();
-  const availableList = [];
-  allSlots.forEach(hour => {
-    const booked = venue.bookings[hour] || 0;
-    const available = venue.totalCourts - booked;
-    if(available > 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF‑8">
+  <meta name="viewport" content="width=device‑width, initial‑scale=1.0">
+  <title>DinkCDO | Cagayan de Oro Pickleball Booking</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="site‑header">
+    <div class="logo">DinkCDO</div>
+    <nav>
+      <a href="index.html" class="active">Find courts</a>
+      <a href="how‑it‑works.html">How it works</a>
+      <a href="owners‑dashboard.html">For court owners</a>
+      <a href="my‑bookings‑calendar.html">My bookings</a>
+    </nav>
+  </header>
+
+  <main class="home‑container">
+    <h1>Find your court. Own your game.</h1>
+    <p>Discover pickleball courts around Cagayan de Oro, compare open timeslots, and book your next game from one place.</p>
+
+    <div class="search‑bar">
+      <input type="text" placeholder="Search court or area">
+      <input type="date">
+      <input type="number" min="1" placeholder="Number of courts" class="court‑filter‑input">
+      <button class="btn‑search">Find a court</button>
+    </div>
+
+    <section class="explore‑courts">
+      <h2>Explore CDO courts</h2>
+      <div id="court‑list"></div>
+    </section>
+  </main>
+
+  <script src="js/booking‑logic.js"></script>
+</body>
+</html>
