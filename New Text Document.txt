@@ -1,0 +1,30 @@
+// DinkCDO Core Booking Logic
+// Settings: Operating hours = 12AM‑11PM; show only available slots; 3% commission (added on top)
+const SETTINGS = {
+  startHour: 0, // 12 AM (00:00)
+  endHour: 23,  // 11 PM (23:00)
+  commissionRate: 0.03 // 3% platform service fee
+};
+const venues = [
+  {
+    id: "venue‑1",
+    name: "Pickle World Limketkai",
+    totalCourts: 3,
+    baseFeePerHour: 500,
+    bookings: {}
+  }
+];
+function generateTimeSlots() {
+  let slots = [];
+  for(let h = SETTINGS.startHour; h <= SETTINGS.endHour; h++) {
+    slots.push(h);
+  }
+  return slots;
+}
+function getAvailableSlots(venue) {
+  const allSlots = generateTimeSlots();
+  const availableList = [];
+  allSlots.forEach(hour => {
+    const booked = venue.bookings[hour] || 0;
+    const available = venue.totalCourts - booked;
+    if(available > 
